@@ -1,4 +1,5 @@
 import sympy as sp
+from sympy import init_printing
 from tripyagonal import AbstractMatrix
 
 
@@ -45,5 +46,6 @@ def pretty(obj):
 
 
 def pprint(obj):
+    init_printing()
     print(pretty(obj))
     return
