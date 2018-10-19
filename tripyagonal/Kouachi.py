@@ -32,7 +32,7 @@ class Kouachi:
         __diag = list(islice(cycle(mat.kwarg('diag')), self.__n))
 
         self.__sub = [parse_expr(x) for x in __sub] if isinstance(__sub[0], str) else __sub
-        self.__super = [parse_expr(x) for x in __super] if isinstance(__super[0], str) else __super
+        self.__sup = [parse_expr(x) for x in __super] if isinstance(__super[0], str) else __super
         self.__diag = [parse_expr(x) for x in __diag] if isinstance(__diag[0], str) else __diag
 
         # check if b's are in b1-b2 or b's
@@ -48,7 +48,7 @@ class Kouachi:
 
         # temp a
         vec_a = [self.__alpha] + self.__sub
-        vec_c = self.__super + [self.__beta]
+        vec_c = self.__sup + [self.__beta]
 
         __dict = []
         for i in range(self.__n - 1):
@@ -144,9 +144,9 @@ class Kouachi:
 
         for k in range(1, self.__n + 1):
             if k <= self.__m:
-                lambda_k = self.__b_1 - 2 * sqrt(self.__sub[0] * self.__super[0]) * cos(self.__theta_ks[k - 1])
+                lambda_k = self.__b_1 - 2 * sqrt(self.__sub[0] * self.__sup[0]) * cos(self.__theta_ks[k - 1])
             elif k <= 2 * self.__m:
-                lambda_k = self.__b_1 + 2 * sqrt(self.__sub[0] * self.__super[0]) * cos(self.__theta_ks[k - 1])
+                lambda_k = self.__b_1 + 2 * sqrt(self.__sub[0] * self.__sup[0]) * cos(self.__theta_ks[k - 1])
             else:
                 lambda_k = self.__b_1
             self.__lambda_ks.append(simplify(factor(expand(lambda_k))))
@@ -287,8 +287,13 @@ class Kouachi:
                 print('Case IV')
                 self.__case4()
             elif self.__d_size == 1 and abs(self.__alpha) + abs(self.__beta) == 0:
-                print('Case I')
-                self.__case1()
+                if self.__sub[0] + self.__diag[0] + self.__sup[0] == 1 \
+                and(0,0,0) <= (self.__sub[0],self.__diag[0] <= self.__sup[0]) <= (1, 1, 1):
+                    print('Case III')
+                    self.__case3()
+                else:
+                    print('Case I')
+                    self.__case1()
             elif self.__d_size == 1 and self.__n % 2 == 0 \
                  and self.__alpha * self.__beta == self.__d_sq if (type(self.__alpha) is float) else \
                     (self.__alpha * self.__beta).equals(self.__d_sq):
@@ -327,10 +332,10 @@ class Kouachi:
                         self.__ev[r - 1, c - 1] *= rho_r
                     if c > self.__n - 2:
                         if r == 2:
-                            self.__ev[r - 1, c - 1] = (-zeta_r_c[0] + self.__alpha) / self.__super[r - 2]
+                            self.__ev[r - 1, c - 1] = (-zeta_r_c[0] + self.__alpha) / self.__sup[r - 2]
                         else:
                             self.__ev[r - 1, c - 1] = ((-zeta_r_c[r % 2] * self.__ev[r - 2, c - 1]) - (
-                                    self.__sub[r - 3] * self.__ev[r - 3, c - 1])) / self.__super[r - 2]
+                                    self.__sub[r - 3] * self.__ev[r - 3, c - 1])) / self.__sup[r - 2]
                 else:  # row is even
                     if self.__n % 2 == 1:  # if odd matrix
                         self.__ev[r - 1, c - 1] = ((zeta_r_c[0] - beta) * sqrt(self.__d_sq) * sin(
@@ -345,10 +350,10 @@ class Kouachi:
                         self.__ev[r - 1, c - 1] *= rho_r
                     if c > self.__n - 2:
                         if r == 2:
-                            self.__ev[r - 1, c - 1] = (-zeta_r_c[0] + self.__alpha) / self.__super[r - 2]
+                            self.__ev[r - 1, c - 1] = (-zeta_r_c[0] + self.__alpha) / self.__sup[r - 2]
                         else:
                             self.__ev[r - 1, c - 1] = ((-zeta_r_c[r % 2] * self.__ev[r - 2, c - 1]) - (
-                                    self.__sub[r - 3] * self.__ev[r - 3, c - 1])) / self.__super[r - 2]
+                                    self.__sub[r - 3] * self.__ev[r - 3, c - 1])) / self.__sup[r - 2]
 
         for r in range(0, self.__n):
             for c in range(0, self.__n):

@@ -4,7 +4,7 @@ from multiprocessing.dummy import Pool as ThreadPool
 
 import numpy as np
 from sympy import *
-from functools import reduce
+
 from tripyagonal import CirculantMatrix
 from tripyagonal import Kouachi
 from tripyagonal import TridiagonalMatrix
@@ -35,7 +35,7 @@ class CayleyHamilton:
         return self.__lambda_ks
 
     def __init_P_list(self, mat):
-        self.__P_list = [mat]
+        self.__P_list = [eye(mat.size(), mat.size()), mat]
         for i in range(2, self.__n + 1):
             self.__P_list.append(mat ** i)
 
@@ -59,8 +59,8 @@ class CayleyHamilton:
 
         for i in range(0, self.__n):
             for j in range(0, self.__n):
-                # denominator starts with x_i
-                denom = self.__lambda_ks[i]
+                # denominator starts with 1
+                denom = 1
 
                 # producted with difference of (x_i - x_m)
                 for m in range(0, self.__n):
