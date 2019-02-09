@@ -28,7 +28,7 @@ class Kouachi:
         __sub = list(islice(cycle(mat.kwarg('sub')), self.__n))
         # drop alpha entry
         del __sub[0]
-        __super = list(islice(cycle(mat.kwarg('super')), self.__n - 1))
+        __super = list(islice(cycle(mat.kwarg('sup')), self.__n - 1))
         __diag = list(islice(cycle(mat.kwarg('diag')), self.__n))
 
         self.__sub = [parse_expr(x) for x in __sub] if isinstance(__sub[0], str) else __sub

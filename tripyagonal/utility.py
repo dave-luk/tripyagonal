@@ -3,6 +3,18 @@ from sympy import init_printing
 from tripyagonal import AbstractMatrix
 
 
+def print_more(obj):
+    try:
+        if isinstance(obj, list):
+            for e in obj:
+                print_more(e)
+        else:
+            print(obj)
+    except:
+        raise
+
+
+
 def latex(obj):
     try:
         if isinstance(obj, list):

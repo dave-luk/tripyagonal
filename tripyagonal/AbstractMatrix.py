@@ -4,7 +4,7 @@ from sympy.parsing.sympy_parser import parse_expr
 
 
 class AbstractMatrix:
-    _arg_dict = {'diag': 0, 'super': 1, 'sub': -1}
+    _arg_dict = {'diag': 0, 'sup': 1, 'sub': -1}
 
     def __init__(self, **kwargs):
         self._size = kwargs['n']
