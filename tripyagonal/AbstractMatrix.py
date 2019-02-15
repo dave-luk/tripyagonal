@@ -34,7 +34,7 @@ class AbstractMatrix:
                     self._data[i, i + self._arg_dict[key]] = element
                 elif key == 'sub':
                     self._alpha = -element
-                elif key == 'super':
+                elif key == 'sup':
                     self._beta = -element
 
         if not self._perturbed:

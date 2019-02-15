@@ -9,13 +9,13 @@ from tripyagonal import *
 
 # How to construct a floating point matrix:
 
-m = TridiagonalMatrix(n=5, diag=1, sub=1, super=2)
+m = TridiagonalMatrix(n=5, diag=1, sub=1, sup=2)
 
 # Note that the entries are provided as floats
 
 # How to construct an exact (stochastic) matrix with multiple entries per diagonal:
 
-m2 = TridiagonalMatrix(n=4, diag=['1/6'], sub=['1/2', '1/3'], super=['1/3', '1/2'], perturbed=True)
+m2 = TridiagonalMatrix(n=4, diag=['1/6'], sub=['1/2', '1/3'], sup=['1/3', '1/2'], perturbed=True)
 
 # The entries here are provided as list of strings, and will be parsed by the sympy parser.
 # The entries will be recycled if insufficient entries are supplied, which can be taken advantage of to create
@@ -49,7 +49,7 @@ print(latex(m2))
 # Refer to utility.py for more built-in tools
 
 # EXAMPLE:
-mat = TridiagonalMatrix(n=6, sub=['3/4', '3/8'], diag=['0'], super=['1/4', '1/2'], perturbed=True)
+mat = TridiagonalMatrix(n=6, sub=['3/4', '3/8'], diag=['0'], sup=['1/4', '1/2'], perturbed=True)
 c_m = CayleyHamilton(mat)
 print(c_m.eigenvalues())
 print(c_m.computeMatrixPower(13))
