@@ -3,7 +3,7 @@ from sympy import *
 from symengine import var
 
 def print_Cs(i, j, size):
-	mat = TridiagonalMatrix(n=size, sub=['a'], diag=['b'], sup=['c'])
+	mat = TridiagonalMatrix(n=size, sub=['c'], diag=['b'], sup=['a'])
 	print(size, i, j)
 	c_m = CayleyHamilton(mat)
 	k_m = Kouachi(mat)
